@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#fff}svg{max-width:100%;height:auto}</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" width="1920" height="800">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0E27"/>
+      <stop offset="50%" stop-color="#1A1F3A"/>
+      <stop offset="100%" stop-color="#0F1429"/>
+    </linearGradient>
+    
+    <linearGradient id="neon1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00D9FF"/>
+      <stop offset="100%" stop-color="#7B61FF"/>
+    </linearGradient>
+    
+    <linearGradient id="neon2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B61FF"/>
+      <stop offset="100%" stop-color="#FF3D9A"/>
+    </linearGradient>
+    
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.1)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.03)"/>
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="glassBlur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
+    </filter>
+    
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,217,255,0.1)" stroke-width="1"/>
+    </pattern>
+    
+    <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(0,217,255,0)">
+        <animate attributeName="offset" values="0;1" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" stop-color="rgba(0,217,255,1)">
+        <animate attributeName="offset" values="0;1" dur="2s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="rgba(0,217,255,0)">
+        <animate attributeName="offset" values="0;1" dur="2s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+  </defs>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700;900&amp;family=Inter:wght@400;600;700&amp;display=swap');
+    
+    .title {
+      font-family: 'Noto Sans TC', 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: 42px;
+      fill: #FFFFFF;
+      letter-spacing: 1px;
+    }
+    
+    .subtitle {
+      font-family: 'Noto Sans TC', 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      fill: rgba(255,255,255,0.7);
+    }
+    
+    .stage-title-zh {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      fill: #FFFFFF;
+    }
+    
+    .stage-title-en {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      fill: #00D9FF;
+      letter-spacing: 1.5px;
+    }
+    
+    .stage-content-zh {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      fill: rgba(255,255,255,0.85);
+    }
+    
+    .stage-content-en {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      fill: rgba(255,255,255,0.6);
+    }
+    
+    .card {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .card:hover .card-bg {
+      fill: rgba(255,255,255,0.15);
+      stroke: url(#neon1);
+      stroke-width: 2;
+    }
+    
+    .card:hover .icon-group {
+      transform: scale(1.1);
+      transform-origin: center;
+    }
+    
+    .pulse-dot {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; r: 4; }
+      50% { opacity: 0.5; r: 6; }
+    }
+    
+    .flow-particle {
+      animation: flowMove 3s linear infinite;
+    }
+    
+    @keyframes flowMove {
+      0% { offset-distance: 0%; }
+      100% { offset-distance: 100%; }
+    }
+    
+    .icon-group {
+      transition: transform 0.3s ease;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+  </style>
+  
+  <!-- Background -->
+  <rect width="1920" height="800" fill="url(#bgGradient)"/>
+  <rect width="1920" height="800" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- Decorative glows -->
+  <circle cx="200" cy="150" r="150" fill="#00D9FF" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="1720" cy="650" r="200" fill="#FF3D9A" opacity="0.06" filter="url(#glow)"/>
+  <circle cx="960" cy="400" r="180" fill="#7B61FF" opacity="0.05" filter="url(#glow)"/>
+  
+  <!-- Title Section -->
+  <g transform="translate(960, 60)">
+    <text class="title" text-anchor="middle">
+      機器學習完整流程 Machine Learning Pipeline
+    </text>
+    <text class="subtitle" text-anchor="middle" y="35">
+      從原始資料到模型監控的端到端解決方案 End-to-end solution from raw data to model monitoring
+    </text>
+  </g>
+  
+  <!-- Main Pipeline Flow -->
+  <g transform="translate(60, 180)">
+    
+    <!-- Connection Lines with Animated Flow -->
+    <g id="connections">
+      <path d="M 220 160 L 435 160" stroke="url(#flowGradient)" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+      <path d="M 455 160 L 670 160" stroke="url(#flowGradient)" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+      <path d="M 690 160 L 905 160" stroke="url(#flowGradient)" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+      <path d="M 925 160 L 1140 160" stroke="url(#flowGradient)" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+      <path d="M 1160 160 L 1375 160" stroke="url(#flowGradient)" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+      <path d="M 1395 160 L 1610 160" stroke="url(#flowGradient)" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+      <path d="M 1630 160 L 1760 160" stroke="url(#flowGradient)" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+      
+      <!-- Arrow heads -->
+      <polygon points="430,155 440,160 430,165" fill="#00D9FF" filter="url(#glow)"/>
+      <polygon points="665,155 675,160 665,165" fill="#00D9FF" filter="url(#glow)"/>
+      <polygon points="900,155 910,160 900,165" fill="#00D9FF" filter="url(#glow)"/>
+      <polygon points="1135,155 1145,160 1135,165" fill="#7B61FF" filter="url(#glow)"/>
+      <polygon points="1370,155 1380,160 1370,165" fill="#7B61FF" filter="url(#glow)"/>
+      <polygon points="1605,155 1615,160 1605,165" fill="#FF3D9A" filter="url(#glow)"/>
+      <polygon points="1755,155 1765,160 1755,165" fill="#FF3D9A" filter="url(#glow)"/>
+    </g>
+    
+    <!-- Stage 1: Clean 清理 -->
+    <g class="card" transform="translate(0, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1" backdrop-filter="blur(10px)"/>
+      
+      <!-- Icon -->
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon1)" stroke-width="2" filter="url(#glow)"/>
+        <path d="M -12 -8 L -12 8 L 0 14 L 12 8 L 12 -8 L 0 -14 Z" fill="none" stroke="#00D9FF" stroke-width="2"/>
+        <path d="M -6 -4 L -6 4 L 0 7 L 6 4 L 6 -4 L 0 -7 Z" fill="#00D9FF" opacity="0.6"/>
+        <circle cx="18" cy="-18" r="4" fill="#00D9FF" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">清理</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">CLEAN</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon1)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">原始資料</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">RAW DATA</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">未處理資料</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Unprocessed data</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">多種格式</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">Different formats</text>
+    </g>
+    
+    <!-- Stage 2: Filter 篩選 -->
+    <g class="card" transform="translate(235, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon1)" stroke-width="2" filter="url(#glow)"/>
+        <path d="M -14 -10 L 14 -10 L 8 2 L 8 12 L -8 12 L -8 2 Z" fill="none" stroke="#00D9FF" stroke-width="2"/>
+        <circle cx="0" cy="4" r="2" fill="#00D9FF"/>
+        <circle cx="0" cy="8" r="2" fill="#00D9FF" opacity="0.6"/>
+        <circle cx="-18" cy="-18" r="4" fill="#7B61FF" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">篩選</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">FILTER</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon1)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">前處理</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">PREPROCESSING</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">處理缺失值</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Handle missing values</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">編碼類別資料</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">Encode categorical data</text>
+      
+      <circle cx="20" cy="300" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="304" text-anchor="start">去除雜訊</text>
+      <text class="stage-content-en" x="35" y="318" text-anchor="start" font-size="9">Remove noise</text>
+    </g>
+    
+    <!-- Stage 3: Transform 轉換 -->
+    <g class="card" transform="translate(470, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon1)" stroke-width="2" filter="url(#glow)"/>
+        <path d="M -10 -10 L 10 10 M -10 10 L 10 -10" stroke="#00D9FF" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="-10" cy="-10" r="3" fill="#00D9FF"/>
+        <circle cx="10" cy="10" r="3" fill="#7B61FF"/>
+        <circle cx="-10" cy="10" r="3" fill="#7B61FF" opacity="0.6"/>
+        <circle cx="10" cy="-10" r="3" fill="#00D9FF" opacity="0.6"/>
+        <circle cx="18" cy="0" r="4" fill="#00D9FF" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">轉換</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">TRANSFORM</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon1)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">轉換</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">TRANSFORMATION</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">正規化</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Normalization</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">縮放</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">Scaling</text>
+      
+      <circle cx="20" cy="300" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="304" text-anchor="start">特徵工程</text>
+      <text class="stage-content-en" x="35" y="318" text-anchor="start" font-size="9">Feature engineering</text>
+    </g>
+    
+    <!-- Stage 4: Prepare 準備 -->
+    <g class="card" transform="translate(705, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon2)" stroke-width="2" filter="url(#glow)"/>
+        <rect x="-12" y="-12" width="24" height="24" rx="3" fill="none" stroke="#7B61FF" stroke-width="2"/>
+        <path d="M -6 -6 L 6 -6 M -6 0 L 6 0 M -6 6 L 6 6" stroke="#7B61FF" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="0" cy="0" r="3" fill="#00D9FF"/>
+        <circle cx="18" cy="-18" r="4" fill="#7B61FF" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">準備</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">PREPARE</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon2)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">就緒資料</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">READY DATA</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">乾淨</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Clean</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">結構化</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">Structured</text>
+      
+      <circle cx="20" cy="300" r="3" fill="#FF3D9A"/>
+      <text class="stage-content-zh" x="35" y="304" text-anchor="start">模型就緒</text>
+      <text class="stage-content-en" x="35" y="318" text-anchor="start" font-size="9">Model-ready</text>
+    </g>
+    
+    <!-- Stage 5: Train 訓練 -->
+    <g class="card" transform="translate(940, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon2)" stroke-width="2" filter="url(#glow)"/>
+        <circle cx="-8" cy="-4" r="6" fill="none" stroke="#7B61FF" stroke-width="2"/>
+        <circle cx="8" cy="-4" r="6" fill="none" stroke="#7B61FF" stroke-width="2"/>
+        <circle cx="0" cy="8" r="6" fill="none" stroke="#FF3D9A" stroke-width="2"/>
+        <path d="M -8 2 L 0 2 M 8 2 L 0 2" stroke="#7B61FF" stroke-width="2"/>
+        <circle cx="-18" cy="18" r="4" fill="#FF3D9A" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">訓練</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">TRAIN</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon2)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">AI 模型訓練</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">AI MODEL TRAINING</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">演算法選擇</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Algorithm selection</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">超參數調整</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">Hyperparameter tuning</text>
+      
+      <circle cx="20" cy="300" r="3" fill="#FF3D9A"/>
+      <text class="stage-content-zh" x="35" y="304" text-anchor="start">交叉驗證</text>
+      <text class="stage-content-en" x="35" y="318" text-anchor="start" font-size="9">Cross validation</text>
+    </g>
+    
+    <!-- Stage 6: Evaluation 評估 -->
+    <g class="card" transform="translate(1175, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon2)" stroke-width="2" filter="url(#glow)"/>
+        <path d="M -12 8 L -6 -8 L 0 0 L 6 -12 L 12 4" fill="none" stroke="#FF3D9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="-12" cy="8" r="3" fill="#7B61FF"/>
+        <circle cx="12" cy="4" r="3" fill="#FF3D9A"/>
+        <circle cx="18" cy="-18" r="4" fill="#FF3D9A" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">評估</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">EVALUATION</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon2)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">模型評估</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">MODEL EVALUATION</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#7B61FF"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">準確率</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Accuracy, Precision</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#FF3D9A"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">召回率</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">Recall</text>
+      
+      <circle cx="20" cy="300" r="3" fill="#FF3D9A"/>
+      <text class="stage-content-zh" x="35" y="304" text-anchor="start">F1-Score</text>
+      <text class="stage-content-en" x="35" y="318" text-anchor="start" font-size="9">F1-Score</text>
+    </g>
+    
+    <!-- Stage 7: Deploy 部署 -->
+    <g class="card" transform="translate(1410, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon2)" stroke-width="2" filter="url(#glow)"/>
+        <path d="M 0 -14 L 0 14 M -10 4 L 0 14 L 10 4" fill="none" stroke="#FF3D9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="-14" y="-6" width="28" height="6" rx="2" fill="none" stroke="#FF3D9A" stroke-width="2"/>
+        <circle cx="-18" cy="-18" r="4" fill="#FF3D9A" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">部署</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">DEPLOY</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon2)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">部署</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">DEPLOYMENT</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#FF3D9A"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">模型上線</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Model deployment</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#FF3D9A"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">API服務</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">API Service</text>
+      
+      <circle cx="20" cy="300" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="304" text-anchor="start">即時推論</text>
+      <text class="stage-content-en" x="35" y="318" text-anchor="start" font-size="9">Real-time inference</text>
+    </g>
+    
+    <!-- Stage 8: Monitoring 監控 -->
+    <g class="card" transform="translate(1645, 0)">
+      <rect class="card-bg" x="0" y="0" width="210" height="320" rx="16" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      
+      <g class="icon-group" transform="translate(105, 50)">
+        <circle cx="0" cy="0" r="28" fill="none" stroke="url(#neon1)" stroke-width="2" filter="url(#glow)"/>
+        <circle cx="0" cy="0" r="14" fill="none" stroke="#00D9FF" stroke-width="2"/>
+        <circle cx="0" cy="0" r="8" fill="none" stroke="#00D9FF" stroke-width="2" opacity="0.6"/>
+        <circle cx="0" cy="0" r="3" fill="#00D9FF"/>
+        <path d="M 0 -14 L 0 -8" stroke="#FF3D9A" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="18" cy="18" r="4" fill="#00D9FF" class="pulse-dot"/>
+      </g>
+      
+      <text class="stage-title-zh" x="105" y="110" text-anchor="middle">監控</text>
+      <text class="stage-title-en" x="105" y="128" text-anchor="middle">MONITORING</text>
+      
+      <line x1="40" y1="145" x2="170" y2="145" stroke="url(#neon1)" stroke-width="2" opacity="0.5"/>
+      
+      <text class="stage-content-zh" x="105" y="175" text-anchor="middle">模型監控</text>
+      <text class="stage-content-en" x="105" y="190" text-anchor="middle">MODEL MONITORING</text>
+      
+      <circle cx="20" cy="220" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="224" text-anchor="start">效能追蹤</text>
+      <text class="stage-content-en" x="35" y="238" text-anchor="start" font-size="9">Performance tracking</text>
+      
+      <circle cx="20" cy="265" r="3" fill="#FF3D9A"/>
+      <text class="stage-content-zh" x="35" y="269" text-anchor="start">資料漂移</text>
+      <text class="stage-content-en" x="35" y="283" text-anchor="start" font-size="9">Data drift</text>
+      
+      <circle cx="20" cy="300" r="3" fill="#00D9FF"/>
+      <text class="stage-content-zh" x="35" y="304" text-anchor="start">自動重訓練</text>
+      <text class="stage-content-en" x="35" y="318" text-anchor="start" font-size="9">Auto retraining</text>
+    </g>
+  </g>
+  
+  <!-- Data Flow Particles -->
+  <g id="particles">
+    <circle r="3" fill="#00D9FF" filter="url(#glow)">
+      <animateMotion dur="8s" repeatCount="indefinite" path="M 280 340 L 515 340 L 750 340 L 985 340 L 1220 340 L 1455 340 L 1690 340 L 1825 340"/>
+    </circle>
+    <circle r="2" fill="#7B61FF" filter="url(#glow)">
+      <animateMotion dur="8s" repeatCount="indefinite" begin="1s" path="M 280 340 L 515 340 L 750 340 L 985 340 L 1220 340 L 1455 340 L 1690 340 L 1825 340"/>
+    </circle>
+    <circle r="2.5" fill="#FF3D9A" filter="url(#glow)">
+      <animateMotion dur="8s" repeatCount="indefinite" begin="2s" path="M 280 340 L 515 340 L 750 340 L 985 340 L 1220 340 L 1455 340 L 1690 340 L 1825 340"/>
+    </circle>
+  </g>
+  
+  <!-- Bottom accent line -->
+  <path d="M 60 560 L 1860 560" stroke="url(#neon1)" stroke-width="1" opacity="0.3" stroke-dasharray="5,5">
+    <animate attributeName="stroke-dashoffset" values="0;10" dur="1s" repeatCount="indefinite"/>
+  </path>
+  
+</svg>
+</body>
+</html>
